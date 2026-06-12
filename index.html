@@ -14,11 +14,11 @@
     --bg2: #0d0d18;
     --text: #f2f2f7;
     --muted: #9a9ab0;
-    --c1: #ff3b5c; /* KARASU */
-    --c2: #2f8bff; /* MASATO */
-    --c3: #ffc93b; /* KAORU */
-    --c4: #38e07d; /* ELECTRIC */
-    --c5: #b16bff; /* KOTO */
+    --c1: #101016; /* KARASU: 黒(縁取り白) */
+    --c2: #ff3b52; /* MASATO: 明るい赤 */
+    --c3: #2fe06b; /* がんそ: ビビッドな緑 */
+    --c4: #cc1437; /* HIDE: 深い赤 */
+    --c5: #a8e62e; /* Kotone: ライムグリーン */
     --accent: #ff3b5c;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -98,7 +98,8 @@
     text-shadow: 0 0 60px rgba(255,59,92,.35);
   }
   .hero h1 .hi5 {
-    background: linear-gradient(90deg, var(--c1), var(--c3) 30%, var(--c4) 55%, var(--c2) 78%, var(--c5));
+    /* KARASUの黒はロゴ上では白で表現(背景が黒のため) */
+    background: linear-gradient(90deg, #f5f5f7, var(--c2) 28%, var(--c3) 52%, var(--c4) 76%, var(--c5));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -252,6 +253,7 @@
   }
   .member {
     --mc: var(--c1);
+    --fx: var(--mc); /* 縁取り・グロー用。黒メンバーは白に上書き */
     position: relative;
     border: 1px solid rgba(255,255,255,.1);
     border-radius: 16px;
@@ -266,11 +268,12 @@
   .member::after {
     content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
     background: var(--mc);
+    border-bottom: 1px solid color-mix(in srgb, var(--fx) 70%, transparent);
   }
   .member:hover {
     transform: translateY(-8px);
-    border-color: var(--mc);
-    box-shadow: 0 16px 40px color-mix(in srgb, var(--mc) 30%, transparent);
+    border-color: var(--fx);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--fx) 30%, transparent);
   }
   .member__avatar {
     width: 96px; height: 96px;
@@ -280,14 +283,15 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 42px;
     color: #fff;
-    background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--mc) 90%, #fff), color-mix(in srgb, var(--mc) 55%, #000));
-    box-shadow: 0 0 28px color-mix(in srgb, var(--mc) 45%, transparent);
+    background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--mc) 88%, #fff), color-mix(in srgb, var(--mc) 55%, #000));
+    border: 2px solid color-mix(in srgb, var(--fx) 85%, transparent);
+    box-shadow: 0 0 28px color-mix(in srgb, var(--fx) 45%, transparent);
   }
   .member__name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: .12em; }
   .member__handle { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 13px; color: var(--muted); }
   .member__handle svg { width: 14px; height: 14px; fill: var(--muted); }
-  .member:hover .member__handle { color: var(--mc); }
-  .member:hover .member__handle svg { fill: var(--mc); }
+  .member:hover .member__handle { color: var(--fx); }
+  .member:hover .member__handle svg { fill: var(--fx); }
 
   /* ===== access ===== */
   .access dl { display: grid; grid-template-columns: 130px 1fr; }
@@ -411,7 +415,7 @@
     <h2 class="sec-title reveal"><small>MEMBERS</small>メンバー</h2>
     <p class="sec-lead reveal">各メンバーのXもチェック!</p>
     <div class="members__grid">
-      <a class="member reveal" style="--mc: var(--c1)" href="https://x.com/slh_karasu_" target="_blank" rel="noopener">
+      <a class="member reveal" style="--mc: var(--c1); --fx: #f5f5f7" href="https://x.com/slh_karasu_" target="_blank" rel="noopener">
         <div class="member__avatar">K</div>
         <div class="member__name">KARASU</div>
         <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@slh_karasu_</div>
