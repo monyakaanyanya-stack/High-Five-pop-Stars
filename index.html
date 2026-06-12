@@ -18,7 +18,7 @@
     --c2: #ff3b52; /* MASATO: 明るい赤 */
     --c3: #2fe06b; /* がんそ: ビビッドな緑 */
     --c4: #cc1437; /* HIDE: 深い赤 */
-    --c5: #a8e62e; /* Kotone: ライムグリーン */
+    --c5: #1fb24d; /* Kotone: 濃いめの緑 */
     --accent: #ff3b5c;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -98,11 +98,13 @@
     text-shadow: 0 0 60px rgba(255,59,92,.35);
   }
   .hero h1 .hi5 {
-    /* KARASUの黒はロゴ上では白で表現(背景が黒のため) */
-    background: linear-gradient(90deg, #f5f5f7, var(--c2) 28%, var(--c3) 52%, var(--c4) 76%, var(--c5));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    /* 全文字を白に、グローでおしゃれに見せる */
+    color: #ffffff;
+    text-shadow:
+      0 0 12px rgba(255,255,255,.85),
+      0 0 28px rgba(255,255,255,.55),
+      0 0 60px rgba(255,255,255,.35),
+      0 0 110px rgba(120,160,255,.30);
   }
   .hero__sub {
     margin-top: 12px;
@@ -133,7 +135,8 @@
     font-size: clamp(16px, 3vw, 24px);
     letter-spacing: .3em;
     text-indent: .3em;
-    color: var(--c3);
+    color: var(--accent);
+    text-shadow: 0 0 24px rgba(255,59,92,.5);
   }
   .hero__cta {
     margin-top: 40px;
