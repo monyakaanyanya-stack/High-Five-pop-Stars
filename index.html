@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Five pop Stars 1st ONE-MAN LIVE | 2026.12.18 Zepp Shinjuku (TOKYO)</title>
+<meta name="description" content="5人組ダンスグループ High Five pop Stars、初のワンマンライブが2026年12月18日(金) Zepp Shinjuku (TOKYO)にて開催決定!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07070d;
+    --bg2: #0d0d18;
+    --text: #f2f2f7;
+    --muted: #9a9ab0;
+    --c1: #ff3b5c; /* KARASU */
+    --c2: #2f8bff; /* MASATO */
+    --c3: #ffc93b; /* KAORU */
+    --c4: #38e07d; /* ELECTRIC */
+    --c5: #b16bff; /* KOTO */
+    --accent: #ff3b5c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow-x: hidden;
+  }
+  .en { font-family: 'Bebas Neue', 'Oswald', sans-serif; letter-spacing: .04em; }
+
+  /* ===== ticker ===== */
+  .ticker {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--accent);
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: .12em;
+    padding: 6px 0;
+  }
+  .ticker__inner { display: inline-block; animation: ticker 22s linear infinite; }
+  .ticker__inner span { margin: 0 28px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ===== hero ===== */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 90px 20px 60px;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -5%, rgba(255,59,92,.22), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 12% 85%, rgba(47,139,255,.16), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 88% 80%, rgba(177,107,255,.15), transparent 60%),
+      var(--bg);
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero__badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px;
+    padding: 8px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .25em;
+    color: var(--text);
+    background: rgba(255,255,255,.04);
+    backdrop-filter: blur(4px);
+    margin-bottom: 30px;
+  }
+  .hero__badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 11vw, 140px);
+    line-height: .95;
+    letter-spacing: .02em;
+    text-shadow: 0 0 60px rgba(255,59,92,.35);
+  }
+  .hero h1 .hi5 {
+    background: linear-gradient(90deg, var(--c1), var(--c3) 30%, var(--c4) 55%, var(--c2) 78%, var(--c5));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero__sub {
+    margin-top: 12px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: clamp(15px, 2.6vw, 24px);
+    letter-spacing: .55em;
+    text-indent: .55em;
+    color: var(--muted);
+  }
+  .hero__live {
+    margin-top: 44px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 6vw, 64px);
+    line-height: 1.1;
+  }
+  .hero__live .num { color: var(--accent); text-shadow: 0 0 30px rgba(255,59,92,.6); }
+  .hero__venue {
+    margin-top: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 4vw, 38px);
+    letter-spacing: .14em;
+  }
+  .hero__decision {
+    margin-top: 18px;
+    font-weight: 900;
+    font-size: clamp(16px, 3vw, 24px);
+    letter-spacing: .3em;
+    text-indent: .3em;
+    color: var(--c3);
+  }
+  .hero__cta {
+    margin-top: 40px;
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  }
+  .btn {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: .18em;
+    text-decoration: none;
+    padding: 16px 44px;
+    border-radius: 999px;
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn--primary {
+    color: #fff;
+    background: linear-gradient(90deg, var(--c1), #ff7a3b);
+    box-shadow: 0 6px 30px rgba(255,59,92,.45);
+  }
+  .btn--primary:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,59,92,.6); }
+  .btn--ghost {
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.04);
+  }
+  .btn--ghost:hover { background: rgba(255,255,255,.12); transform: translateY(-3px); }
+
+  .scrolldown {
+    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+    font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: .3em;
+    color: var(--muted);
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+
+  /* ===== countdown ===== */
+  .countdown {
+    background: var(--bg2);
+    border-top: 1px solid rgba(255,255,255,.07);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    padding: 36px 20px;
+    text-align: center;
+  }
+  .countdown__label { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: .35em; color: var(--muted); margin-bottom: 14px; }
+  .countdown__timer { display: flex; justify-content: center; gap: clamp(14px, 4vw, 40px); flex-wrap: wrap; }
+  .countdown__unit .val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 8vw, 80px);
+    line-height: 1;
+    color: var(--text);
+    text-shadow: 0 0 24px rgba(255,59,92,.4);
+  }
+  .countdown__unit .unit { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: .25em; color: var(--muted); margin-top: 6px; }
+
+  /* ===== sections ===== */
+  section { padding: 90px 20px; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .sec-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .sec-title small {
+    display: block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .3em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .sec-lead { color: var(--muted); margin-bottom: 50px; line-height: 1.9; }
+
+  /* ===== live info ===== */
+  .live { background: var(--bg); }
+  .live__card {
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    padding: clamp(28px, 5vw, 56px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  }
+  .live__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 5vw, 48px); margin-bottom: 6px; }
+  .live__title em { font-style: normal; color: var(--accent); }
+  .live__sub { color: var(--muted); font-size: 14px; letter-spacing: .1em; margin-bottom: 34px; }
+  .live dl { display: grid; grid-template-columns: 130px 1fr; row-gap: 0; }
+  .live dt, .live dd { padding: 18px 0; border-top: 1px solid rgba(255,255,255,.09); }
+  .live dt { font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: .2em; font-size: 13px; color: var(--accent); }
+  .live dd { font-size: 16px; line-height: 1.8; }
+  .live dd .big { font-size: clamp(20px, 3.4vw, 28px); font-weight: 900; }
+  .note { font-size: 12px; color: var(--muted); margin-top: 22px; line-height: 1.8; }
+  .live__cta { margin-top: 34px; text-align: center; }
+
+  /* ===== movie ===== */
+  .movie { background: var(--bg2); }
+  .movie__wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 24px 70px rgba(255,59,92,.18), 0 12px 40px rgba(0,0,0,.5);
+  }
+  .movie__wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .movie__title { margin-top: 18px; font-weight: 700; font-size: 15px; line-height: 1.7; }
+  .movie__more { margin-top: 26px; text-align: center; }
+
+  /* ===== members ===== */
+  .members { background: var(--bg); }
+  .members__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+  }
+  .member {
+    --mc: var(--c1);
+    position: relative;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    background: rgba(255,255,255,.03);
+    padding: 28px 18px 24px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+    overflow: hidden;
+  }
+  .member::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
+    background: var(--mc);
+  }
+  .member:hover {
+    transform: translateY(-8px);
+    border-color: var(--mc);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--mc) 30%, transparent);
+  }
+  .member__avatar {
+    width: 96px; height: 96px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: #fff;
+    background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--mc) 90%, #fff), color-mix(in srgb, var(--mc) 55%, #000));
+    box-shadow: 0 0 28px color-mix(in srgb, var(--mc) 45%, transparent);
+  }
+  .member__name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: .12em; }
+  .member__handle { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .member__handle svg { width: 14px; height: 14px; fill: var(--muted); }
+  .member:hover .member__handle { color: var(--mc); }
+  .member:hover .member__handle svg { fill: var(--mc); }
+
+  /* ===== access ===== */
+  .access dl { display: grid; grid-template-columns: 130px 1fr; }
+  .access dt, .access dd { padding: 16px 0; border-top: 1px solid rgba(255,255,255,.09); }
+  .access dt { font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: .2em; font-size: 13px; color: var(--accent); }
+  .access dd { font-size: 15px; line-height: 1.8; }
+  .access__map {
+    margin-top: 30px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.1);
+  }
+  .access__map iframe { display: block; width: 100%; height: 360px; border: 0; filter: grayscale(.2) contrast(1.05); }
+
+  /* ===== footer ===== */
+  footer {
+    background: #04040a;
+    border-top: 1px solid rgba(255,255,255,.07);
+    text-align: center;
+    padding: 56px 20px 40px;
+  }
+  footer .logo { font-family: 'Bebas Neue', sans-serif; font-size: 34px; margin-bottom: 18px; }
+  footer .sns { display: flex; justify-content: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+  footer .sns a {
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    border: 1px solid rgba(255,255,255,.15); border-radius: 999px; padding: 8px 16px;
+    transition: color .2s, border-color .2s;
+  }
+  footer .sns a:hover { color: var(--text); border-color: var(--text); }
+  footer .copy { font-size: 11px; color: #55556a; letter-spacing: .1em; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible { opacity: 1; transform: none; }
+
+  @media (max-width: 560px) {
+    .live dl, .access dl { grid-template-columns: 1fr; }
+    .live dt, .access dt { padding-bottom: 2px; border-top: 1px solid rgba(255,255,255,.09); }
+    .live dd, .access dd { border-top: 0; padding-top: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__inner">
+    <span>HIGH FIVE POP STARS</span><span>★</span><span>1ST ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
+    <span>HIGH FIVE POP STARS</span><span>★</span><span>1ST ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero__badge"><span class="dot"></span>ONE-MAN LIVE 開催決定</div>
+  <h1><span class="hi5">HIGH FIVE</span><br>POP STARS</h1>
+  <p class="hero__sub">1ST ONE-MAN LIVE</p>
+  <p class="hero__live en"><span class="num">2026.12.18</span> FRI</p>
+  <p class="hero__venue">ZEPP SHINJUKU (TOKYO)</p>
+  <p class="hero__decision">— ワンマンライブ開催決定!!! —</p>
+  <div class="hero__cta">
+    <a class="btn btn--primary" href="#live">TICKET / 公演情報</a>
+    <a class="btn btn--ghost" href="#members">MEMBERS</a>
+  </div>
+  <div class="scrolldown">SCROLL</div>
+</header>
+
+<div class="countdown">
+  <p class="countdown__label">LIVE まで あと</p>
+  <div class="countdown__timer" id="countdown">
+    <div class="countdown__unit"><div class="val" id="cd-days">--</div><div class="unit">DAYS</div></div>
+    <div class="countdown__unit"><div class="val" id="cd-hours">--</div><div class="unit">HOURS</div></div>
+    <div class="countdown__unit"><div class="val" id="cd-mins">--</div><div class="unit">MINUTES</div></div>
+    <div class="countdown__unit"><div class="val" id="cd-secs">--</div><div class="unit">SECONDS</div></div>
+  </div>
+</div>
+
+<section class="live" id="live">
+  <div class="container">
+    <h2 class="sec-title reveal"><small>LIVE INFORMATION</small>公演情報</h2>
+    <div class="live__card reveal">
+      <h3 class="live__title">High Five pop Stars <em>1st ONE-MAN LIVE</em></h3>
+      <p class="live__sub">"HIGH FIVE!!!!! " — 5人の手が、新宿で重なる夜。</p>
+      <dl>
+        <dt>DATE</dt>
+        <dd><span class="big">2026年12月18日(金)</span></dd>
+        <dt>VENUE</dt>
+        <dd><span class="big">Zepp Shinjuku (TOKYO)</span><br>東京都新宿区歌舞伎町一丁目29番1号 東急歌舞伎町タワー B1F〜B4F</dd>
+        <dt>OPEN / START</dt>
+        <dd>OPEN 17:00 / START 18:00 <small style="color:var(--muted)">(予定)</small></dd>
+        <dt>TICKET</dt>
+        <dd>1Fスタンディング ¥5,500 / 2F指定席 ¥6,500 <small style="color:var(--muted)">(税込・ドリンク代別)</small></dd>
+        <dt>ON SALE</dt>
+        <dd>最速先行受付:近日解禁 / 一般発売:近日解禁</dd>
+      </dl>
+      <p class="note">※ 開場・開演時間、チケット料金は仮の情報です。確定次第このページでお知らせします。<br>※ 未就学児入場不可。営利目的の転売は禁止です。</p>
+      <div class="live__cta">
+        <a class="btn btn--primary" href="#" onclick="alert('チケット受付ページは近日公開!'); return false;">チケットを申し込む</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="movie" id="movie">
+  <div class="container">
+    <h2 class="sec-title reveal"><small>MOVIE</small>最新動画</h2>
+    <p class="sec-lead reveal">5人のオリジナル振付、まずはこれを観てから新宿へ。</p>
+    <div class="movie__wrap reveal">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/nKLtpd5lORA"
+        title="【High Five pop Stars】セレナーデ踊ってみた【オリジナル振付】"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen loading="lazy"></iframe>
+    </div>
+    <p class="movie__title reveal">【High Five pop Stars】セレナーデ踊ってみた【オリジナル振付】</p>
+    <p class="movie__more reveal">
+      <a class="btn btn--ghost" href="https://www.youtube.com/watch?v=nKLtpd5lORA" target="_blank" rel="noopener" style="font-size:13px; padding:12px 30px;">YOUTUBEで観る</a>
+    </p>
+  </div>
+</section>
+
+<section class="members" id="members">
+  <div class="container">
+    <h2 class="sec-title reveal"><small>MEMBERS</small>メンバー</h2>
+    <p class="sec-lead reveal">各メンバーのXもチェック!</p>
+    <div class="members__grid">
+      <a class="member reveal" style="--mc: var(--c1)" href="https://x.com/slh_karasu_" target="_blank" rel="noopener">
+        <div class="member__avatar">K</div>
+        <div class="member__name">KARASU</div>
+        <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@slh_karasu_</div>
+      </a>
+      <a class="member reveal" style="--mc: var(--c2)" href="https://x.com/Masato_Kt" target="_blank" rel="noopener">
+        <div class="member__avatar">M</div>
+        <div class="member__name">MASATO</div>
+        <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@Masato_Kt</div>
+      </a>
+      <a class="member reveal" style="--mc: var(--c3)" href="https://x.com/KaoruGans0" target="_blank" rel="noopener">
+        <div class="member__avatar">G</div>
+        <div class="member__name">がんそ</div>
+        <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@KaoruGans0</div>
+      </a>
+      <a class="member reveal" style="--mc: var(--c4)" href="https://x.com/ELECTRIC4s" target="_blank" rel="noopener">
+        <div class="member__avatar">H</div>
+        <div class="member__name">HIDE</div>
+        <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@ELECTRIC4s</div>
+      </a>
+      <a class="member reveal" style="--mc: var(--c5)" href="https://x.com/ko_to555" target="_blank" rel="noopener">
+        <div class="member__avatar">K</div>
+        <div class="member__name">Kotone</div>
+        <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@ko_to555</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="access" id="access">
+  <div class="container">
+    <h2 class="sec-title reveal"><small>ACCESS</small>会場アクセス</h2>
+    <dl class="reveal">
+      <dt>VENUE</dt>
+      <dd>Zepp Shinjuku (TOKYO)</dd>
+      <dt>ADDRESS</dt>
+      <dd>〒160-0021 東京都新宿区歌舞伎町一丁目29番1号 東急歌舞伎町タワー B1F〜B4F</dd>
+      <dt>TRAIN</dt>
+      <dd>西武新宿線「西武新宿駅」北口より徒歩約1分 / JR各線「新宿駅」東口より徒歩約7分 / 東京メトロ丸ノ内線・副都心線・都営新宿線「新宿三丁目駅」より徒歩約8分</dd>
+    </dl>
+    <div class="access__map reveal">
+      <iframe
+        src="https://www.google.com/maps?q=Zepp%20Shinjuku%20(TOKYO)&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Zepp Shinjuku (TOKYO) 地図"></iframe>
+    </div>
+    <p style="text-align:center; margin-top:18px;">
+      <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Zepp+Shinjuku+(TOKYO)" target="_blank" rel="noopener" style="font-size:13px; padding:12px 30px;">GOOGLEマップで開く</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="logo en">HIGH FIVE POP STARS</div>
+  <div class="sns">
+    <a href="https://x.com/slh_karasu_" target="_blank" rel="noopener">KARASU</a>
+    <a href="https://x.com/Masato_Kt" target="_blank" rel="noopener">MASATO</a>
+    <a href="https://x.com/KaoruGans0" target="_blank" rel="noopener">がんそ</a>
+    <a href="https://x.com/ELECTRIC4s" target="_blank" rel="noopener">HIDE</a>
+    <a href="https://x.com/ko_to555" target="_blank" rel="noopener">Kotone</a>
+  </div>
+  <p class="copy">&copy; 2026 High Five pop Stars. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // countdown to live (2026-12-18 18:00 JST)
+  const target = new Date('2026-12-18T18:00:00+09:00').getTime();
+  function tick() {
+    let diff = Math.max(0, target - Date.now());
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff % 86400000 / 3600000);
+    const m = Math.floor(diff % 3600000 / 60000);
+    const s = Math.floor(diff % 60000 / 1000);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
