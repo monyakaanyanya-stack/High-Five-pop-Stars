@@ -5,21 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>High Five pop Stars 2nd ONE-MAN LIVE | 2026.12.18 Zepp Shinjuku (TOKYO)</title>
 <meta name="description" content="5人組ダンスグループ High Five pop Stars、2ndワンマンライブが2026年12月18日(金) Zepp Shinjuku (TOKYO)にて開催決定!">
+<meta property="og:title" content="High Five pop Stars 2nd ONE-MAN LIVE">
+<meta property="og:description" content="2026.12.18 FRI / Zepp Shinjuku (TOKYO)。5人組ダンスグループ、2度目のワンマン。">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #07070d;
-    --bg2: #0d0d18;
-    --text: #f2f2f7;
-    --muted: #9a9ab0;
-    --c1: #101016; /* KARASU: 黒(縁取り白) */
+    --bg: #08080a;
+    --bg2: #0d0d10;
+    --panel: #101014;
+    --line: rgba(255,255,255,.12);
+    --line-soft: rgba(255,255,255,.07);
+    --text: #f4f4ef;
+    --muted: #8c8c98;
+    --c1: #f5f5f7; /* KARASU: 黒メンバー→白で表現 */
     --c2: #ff3b52; /* MASATO: 明るい赤 */
     --c3: #2fe06b; /* がんそ: ビビッドな緑 */
     --c4: #cc1437; /* HIDE: 深い赤 */
     --c5: #1fb24d; /* Kotone: 濃いめの緑 */
-    --accent: #ff3b5c;
+    --accent: #ff2d46;
+    --ease: cubic-bezier(.22,.61,.36,1);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -28,357 +35,407 @@
     color: var(--text);
     font-family: 'Noto Sans JP', sans-serif;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
+  ::selection { background: var(--accent); color: #fff; }
+  a { color: inherit; }
+
+  .mono { font-family: 'Space Mono', monospace; }
+  .anton { font-family: 'Anton', sans-serif; letter-spacing: .01em; }
   .en { font-family: 'Bebas Neue', 'Oswald', sans-serif; letter-spacing: .04em; }
 
-  /* ===== ticker ===== */
-  .ticker {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: var(--accent);
-    color: #fff;
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: .12em;
-    padding: 6px 0;
+  /* ===== film grain + vignette overlays ===== */
+  .grain {
+    position: fixed; inset: 0; z-index: 9000; pointer-events: none;
+    opacity: .05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 1.2s steps(3) infinite;
   }
-  .ticker__inner { display: inline-block; animation: ticker 22s linear infinite; }
-  .ticker__inner span { margin: 0 28px; }
+  @keyframes grain { 0%{transform:translate(0,0)} 33%{transform:translate(-4%,2%)} 66%{transform:translate(3%,-3%)} 100%{transform:translate(0,0)} }
+  .vignette {
+    position: fixed; inset: 0; z-index: 8999; pointer-events: none;
+    box-shadow: inset 0 0 200px 40px rgba(0,0,0,.6);
+  }
+
+  /* ===== scroll progress ===== */
+  .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 10000; box-shadow: 0 0 12px var(--accent); }
+
+  /* ===== top ticker ===== */
+  .ticker {
+    position: fixed; top: 3px; left: 0; right: 0; z-index: 100;
+    background: #000;
+    border-bottom: 1px solid var(--line);
+    color: #fff;
+    overflow: hidden; white-space: nowrap;
+    font-family: 'Space Mono', monospace; font-weight: 700;
+    font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    padding: 8px 0;
+  }
+  .ticker__inner { display: inline-block; animation: ticker 26s linear infinite; }
+  .ticker__inner span { margin: 0 22px; }
+  .ticker__inner .star { color: var(--accent); }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ===== big outline marquee divider ===== */
+  .marquee {
+    overflow: hidden; white-space: nowrap;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    padding: 18px 0;
+  }
+  .marquee__inner { display: inline-block; animation: marquee 30s linear infinite; }
+  .marquee--rev .marquee__inner { animation-direction: reverse; }
+  .marquee__inner span {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(34px, 6vw, 72px);
+    letter-spacing: .02em;
+    margin: 0 26px;
+    color: transparent;
+    -webkit-text-stroke: 1.4px rgba(255,255,255,.45);
+    text-transform: uppercase;
+  }
+  .marquee__inner .fill { color: var(--accent); -webkit-text-stroke: 0; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ===== hero ===== */
   .hero {
     position: relative;
     min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center;
-    padding: 90px 20px 60px;
+    padding: 120px 24px 90px;
     background:
-      radial-gradient(ellipse 80% 55% at 50% -5%, rgba(255,59,92,.22), transparent 60%),
-      radial-gradient(ellipse 55% 45% at 12% 85%, rgba(47,139,255,.16), transparent 60%),
-      radial-gradient(ellipse 55% 45% at 88% 80%, rgba(177,107,255,.15), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,45,70,.18), transparent 60%),
       var(--bg);
+    overflow: hidden;
   }
+  /* technical grid */
   .hero::before {
-    content: "";
-    position: absolute; inset: 0;
+    content: ""; position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, #000 30%, transparent 75%);
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 35%, transparent 78%);
     pointer-events: none;
   }
-  .hero__badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    border: 1px solid rgba(255,255,255,.25);
-    border-radius: 999px;
-    padding: 8px 22px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .25em;
-    color: var(--text);
-    background: rgba(255,255,255,.04);
-    backdrop-filter: blur(4px);
-    margin-bottom: 30px;
+  /* giant ghost watermark */
+  .hero__wm {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(180px, 40vw, 560px);
+    line-height: .8; letter-spacing: -.02em;
+    color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.05);
+    pointer-events: none; user-select: none; white-space: nowrap;
   }
-  .hero__badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1.6s ease-in-out infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  /* crop marks */
+  .crop { position: absolute; width: 22px; height: 22px; border: 0 solid rgba(255,255,255,.35); z-index: 3; }
+  .crop.tl { top: 84px; left: 22px; border-top-width: 1.5px; border-left-width: 1.5px; }
+  .crop.tr { top: 84px; right: 22px; border-top-width: 1.5px; border-right-width: 1.5px; }
+  .crop.bl { bottom: 22px; left: 22px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+  .crop.br { bottom: 22px; right: 22px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+  .hero__tag { position: absolute; top: 88px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .15em; color: var(--muted); z-index: 3; }
+  .hero__tag.l { left: 54px; }
+  .hero__tag.r { right: 54px; }
+
+  .hero__content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+
+  .hero__kicker {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .25em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 26px;
+    animation: rise .8s var(--ease) both;
+  }
+  .hero__kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1.6s ease-in-out infinite; }
+  .hero__kicker b { color: var(--text); font-weight: 700; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
 
   .hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(56px, 11vw, 140px);
-    line-height: .95;
-    letter-spacing: .02em;
-    text-shadow: 0 0 60px rgba(255,59,92,.35);
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(62px, 13vw, 168px);
+    line-height: .86; letter-spacing: .005em;
+    text-transform: uppercase;
   }
+  .hero h1 .line { display: block; overflow: hidden; }
+  .hero h1 .line > span { display: block; animation: rise 1s var(--ease) both; }
+  .hero h1 .line:nth-child(2) > span { animation-delay: .12s; }
   .hero h1 .hi5 {
-    /* 全文字を白に、控えめなグロー */
-    color: #ffffff;
-    text-shadow:
-      0 0 18px rgba(255,255,255,.35),
-      0 0 50px rgba(120,160,255,.20);
+    background: linear-gradient(100deg, #fff 0%, #fff 42%, #ffc7cf 50%, #fff 58%, #fff 100%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 16px rgba(255,255,255,.18));
+    animation: shine 7s linear infinite;
   }
+  @keyframes shine { to { background-position: -250% 0; } }
+  @keyframes rise { from { transform: translateY(108%); } to { transform: translateY(0); } }
+
   .hero__sub {
-    margin-top: 12px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: clamp(15px, 2.6vw, 24px);
-    letter-spacing: .55em;
-    text-indent: .55em;
-    color: var(--muted);
-  }
-  .hero__live {
-    margin-top: 44px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(30px, 6vw, 64px);
-    line-height: 1.1;
-  }
-  .hero__live .num { color: var(--accent); text-shadow: 0 0 30px rgba(255,59,92,.6); }
-  .hero__venue {
-    margin-top: 8px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: clamp(20px, 4vw, 38px);
-    letter-spacing: .14em;
-  }
-  .hero__decision {
-    margin-top: 18px;
-    font-weight: 900;
-    font-size: clamp(16px, 3vw, 24px);
-    letter-spacing: .3em;
-    text-indent: .3em;
-    color: var(--accent);
-    text-shadow: 0 0 24px rgba(255,59,92,.5);
-  }
-  .hero__cta {
-    margin-top: 40px;
-    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-  }
-  .btn {
-    display: inline-block;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: .18em;
-    text-decoration: none;
-    padding: 16px 44px;
-    border-radius: 999px;
-    transition: transform .2s, box-shadow .2s, background .2s;
-  }
-  .btn--primary {
-    color: #fff;
-    background: linear-gradient(90deg, var(--c1), #ff7a3b);
-    box-shadow: 0 6px 30px rgba(255,59,92,.45);
-  }
-  .btn--primary:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,59,92,.6); }
-  .btn--ghost {
+    margin-top: 20px;
+    font-family: 'Space Mono', monospace; font-weight: 700;
+    font-size: clamp(13px, 2.4vw, 20px); letter-spacing: .5em; text-indent: .5em;
     color: var(--text);
-    border: 1px solid rgba(255,255,255,.35);
-    background: rgba(255,255,255,.04);
+    animation: rise .9s var(--ease) .2s both;
   }
-  .btn--ghost:hover { background: rgba(255,255,255,.12); transform: translateY(-3px); }
+
+  .hero__info {
+    margin-top: 40px;
+    display: flex; align-items: stretch; gap: 0;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.02);
+    backdrop-filter: blur(4px);
+    animation: fade 1s var(--ease) .35s both;
+  }
+  .hero__info > div { padding: 16px clamp(16px, 3vw, 30px); display: flex; flex-direction: column; justify-content: center; }
+  .hero__info > div + div { border-left: 1px solid var(--line); }
+  .hero__info .k { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .22em; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+  .hero__info .v { font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px, 3.6vw, 34px); line-height: 1; letter-spacing: .02em; }
+  .hero__info .v.accent { color: var(--accent); }
+
+  .hero__decision {
+    margin-top: 26px;
+    font-family: 'Space Mono', monospace; font-weight: 700;
+    font-size: clamp(13px, 2.2vw, 17px); letter-spacing: .22em;
+    color: var(--accent);
+    animation: fade 1s var(--ease) .45s both;
+  }
+
+  .hero__cta { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: fade 1s var(--ease) .55s both; }
+  @keyframes fade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* ===== buttons (sharp, notched) ===== */
+  .btn {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Space Mono', monospace; font-weight: 700;
+    font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+    text-decoration: none; padding: 16px 34px;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: transform .2s var(--ease), color .2s, background .2s;
+    overflow: hidden;
+  }
+  .btn span { position: relative; z-index: 1; }
+  .btn::before { content: ""; position: absolute; inset: 0; z-index: 0; transition: transform .35s var(--ease); }
+  .btn--primary { color: #fff; background: var(--accent); }
+  .btn--primary::before { background: #fff; transform: translateY(101%); }
+  .btn--primary:hover { color: #000; transform: translateY(-2px); }
+  .btn--primary:hover::before { transform: translateY(0); }
+  .btn--ghost { color: var(--text); border: 1px solid var(--line); background: transparent; }
+  .btn--ghost::before { background: var(--text); transform: translateY(101%); }
+  .btn--ghost:hover { color: #000; transform: translateY(-2px); }
+  .btn--ghost:hover::before { transform: translateY(0); }
+  .btn--sm { padding: 12px 24px; font-size: 12px; }
 
   .scrolldown {
-    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
-    font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: .3em;
-    color: var(--muted);
-    animation: bob 2s ease-in-out infinite;
+    position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .3em; color: var(--muted);
+    display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 3;
   }
-  @keyframes bob { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+  .scrolldown::after { content: ""; width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: drop 1.8s ease-in-out infinite; }
+  @keyframes drop { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
 
   /* ===== countdown ===== */
-  .countdown {
-    background: var(--bg2);
-    border-top: 1px solid rgba(255,255,255,.07);
-    border-bottom: 1px solid rgba(255,255,255,.07);
-    padding: 36px 20px;
-    text-align: center;
-  }
-  .countdown__label { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: .35em; color: var(--muted); margin-bottom: 14px; }
-  .countdown__timer { display: flex; justify-content: center; gap: clamp(14px, 4vw, 40px); flex-wrap: wrap; }
+  .countdown { background: var(--bg2); border-bottom: 1px solid var(--line); padding: 44px 20px; text-align: center; }
+  .countdown__label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .35em; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; }
+  .countdown__timer { display: flex; justify-content: center; align-items: flex-start; gap: clamp(8px, 3vw, 28px); }
+  .countdown__unit { display: flex; flex-direction: column; align-items: center; }
   .countdown__unit .val {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(44px, 8vw, 80px);
-    line-height: 1;
-    color: var(--text);
-    text-shadow: 0 0 24px rgba(255,59,92,.4);
+    font-family: 'Anton', sans-serif; font-size: clamp(46px, 9vw, 92px); line-height: .9;
+    color: var(--text); font-variant-numeric: tabular-nums;
   }
-  .countdown__unit .unit { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: .25em; color: var(--muted); margin-top: 6px; }
+  .countdown__unit .unit { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .25em; color: var(--muted); margin-top: 10px; text-transform: uppercase; }
+  .countdown__sep { font-family: 'Anton', sans-serif; font-size: clamp(34px, 7vw, 72px); color: var(--accent); line-height: 1; padding-top: 4px; }
 
   /* ===== sections ===== */
-  section { padding: 90px 20px; }
-  .container { max-width: 1080px; margin: 0 auto; }
-  .sec-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 7vw, 72px);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .sec-title small {
-    display: block;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .3em;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-  .sec-lead { color: var(--muted); margin-bottom: 50px; line-height: 1.9; }
+  section { padding: clamp(70px, 11vw, 130px) 20px; position: relative; }
+  .container { max-width: 1120px; margin: 0 auto; position: relative; }
+  .kicker { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+  .kicker .idx { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px; color: var(--accent); letter-spacing: .1em; }
+  .kicker .label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .28em; color: var(--muted); text-transform: uppercase; }
+  .kicker .rule { flex: 1; height: 1px; background: var(--line); }
+  .sec-title { font-family: 'Anton', sans-serif; font-size: clamp(38px, 7vw, 84px); line-height: .95; letter-spacing: .01em; margin-bottom: 14px; }
+  .sec-lead { color: var(--muted); margin-bottom: 54px; line-height: 1.9; max-width: 640px; }
 
   /* ===== live info ===== */
   .live { background: var(--bg); }
   .live__card {
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 20px;
-    background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    border: 1px solid var(--line);
+    background: linear-gradient(160deg, rgba(255,255,255,.045), rgba(255,255,255,.01));
     padding: clamp(28px, 5vw, 56px);
-    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px));
   }
-  .live__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 5vw, 48px); margin-bottom: 6px; }
+  .live__title { font-family: 'Anton', sans-serif; font-size: clamp(26px, 5vw, 46px); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .01em; }
   .live__title em { font-style: normal; color: var(--accent); }
-  .live__sub { color: var(--muted); font-size: 14px; letter-spacing: .1em; margin-bottom: 34px; }
-  .live dl { display: grid; grid-template-columns: 130px 1fr; row-gap: 0; }
-  .live dt, .live dd { padding: 18px 0; border-top: 1px solid rgba(255,255,255,.09); }
-  .live dt { font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: .2em; font-size: 13px; color: var(--accent); }
+  .live__sub { color: var(--muted); font-size: 14px; letter-spacing: .06em; margin-bottom: 36px; }
+  .live dl { display: grid; grid-template-columns: 150px 1fr; }
+  .live dt, .live dd { padding: 18px 0; border-top: 1px solid var(--line-soft); }
+  .live dt { font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: .14em; font-size: 12px; color: var(--accent); text-transform: uppercase; }
   .live dd { font-size: 16px; line-height: 1.8; }
   .live dd .big { font-size: clamp(20px, 3.4vw, 28px); font-weight: 900; }
-  .note { font-size: 12px; color: var(--muted); margin-top: 22px; line-height: 1.8; }
-  .live__cta { margin-top: 34px; text-align: center; }
+  .note { font-size: 12px; color: var(--muted); margin-top: 24px; line-height: 1.9; }
+  .live__cta { margin-top: 36px; }
 
   /* ===== movie ===== */
   .movie { background: var(--bg2); }
   .movie__wrap {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.12);
-    box-shadow: 0 24px 70px rgba(255,59,92,.18), 0 12px 40px rgba(0,0,0,.5);
+    position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+    border: 1px solid var(--line);
+    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px));
+    box-shadow: 0 30px 80px rgba(0,0,0,.55);
   }
   .movie__wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .movie__title { margin-top: 18px; font-weight: 700; font-size: 15px; line-height: 1.7; }
-  .movie__more { margin-top: 26px; text-align: center; }
+  .movie__title { margin-top: 20px; font-weight: 700; font-size: 15px; line-height: 1.7; }
+  .movie__more { margin-top: 26px; }
 
   /* ===== members ===== */
   .members { background: var(--bg); }
-  .members__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 18px;
-  }
+  .members__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .member {
-    --mc: var(--c1);
-    --fx: var(--mc); /* 縁取り・グロー用。黒メンバーは白に上書き */
-    position: relative;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 16px;
-    background: rgba(255,255,255,.03);
-    padding: 28px 18px 24px;
-    text-align: center;
-    text-decoration: none;
-    color: var(--text);
-    transition: transform .25s, border-color .25s, box-shadow .25s;
+    --mc: var(--c1); --fx: var(--mc);
+    position: relative; display: block; text-decoration: none; color: var(--text);
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 20px 18px 22px;
     overflow: hidden;
+    transition: transform .3s var(--ease), border-color .3s, background .3s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
   }
-  .member::after {
-    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
-    background: var(--mc);
-    border-bottom: 1px solid color-mix(in srgb, var(--fx) 70%, transparent);
-  }
-  .member:hover {
-    transform: translateY(-8px);
-    border-color: var(--fx);
-    box-shadow: 0 16px 40px color-mix(in srgb, var(--fx) 30%, transparent);
-  }
-  .member__avatar {
-    width: 96px; height: 96px;
-    margin: 0 auto 18px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    color: #fff;
-    background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--mc) 88%, #fff), color-mix(in srgb, var(--mc) 55%, #000));
-    border: 2px solid color-mix(in srgb, var(--fx) 85%, transparent);
-    box-shadow: 0 0 28px color-mix(in srgb, var(--fx) 45%, transparent);
-    /* 写真アバター: 元写真の寄り感がバラバラなので個別にズーム/位置調整して顔の大きさを揃える */
+  .member__idx { position: absolute; top: 12px; right: 14px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: .1em; z-index: 2; }
+  .member__bar { position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--mc); }
+  .member__photo {
+    width: 100%; aspect-ratio: 1; border-radius: 6px; margin-bottom: 18px;
     background-repeat: no-repeat;
+    filter: saturate(.85) contrast(1.03);
+    transition: filter .35s, transform .5s var(--ease);
+    border: 1px solid var(--line-soft);
   }
-  .member__name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: .12em; }
-  .member__handle { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 13px; color: var(--muted); }
-  .member__handle svg { width: 14px; height: 14px; fill: var(--muted); }
+  .member__name { font-family: 'Anton', sans-serif; font-size: 26px; letter-spacing: .03em; text-transform: uppercase; line-height: 1; }
+  .member__role { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .25em; color: var(--mc); margin-top: 8px; text-transform: uppercase; }
+  .member__handle { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
+  .member__handle svg { width: 13px; height: 13px; fill: currentColor; }
+  .member:hover { transform: translateY(-6px); border-color: var(--fx); background: #15151a; }
+  .member:hover .member__photo { filter: saturate(1.1) contrast(1.05); transform: scale(1.03); }
   .member:hover .member__handle { color: var(--fx); }
-  .member:hover .member__handle svg { fill: var(--fx); }
 
   /* ===== access ===== */
-  .access dl { display: grid; grid-template-columns: 130px 1fr; }
-  .access dt, .access dd { padding: 16px 0; border-top: 1px solid rgba(255,255,255,.09); }
-  .access dt { font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: .2em; font-size: 13px; color: var(--accent); }
+  .access { background: var(--bg2); }
+  .access dl { display: grid; grid-template-columns: 150px 1fr; }
+  .access dt, .access dd { padding: 16px 0; border-top: 1px solid var(--line-soft); }
+  .access dt { font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: .14em; font-size: 12px; color: var(--accent); text-transform: uppercase; }
   .access dd { font-size: 15px; line-height: 1.8; }
   .access__map {
-    margin-top: 30px;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.1);
+    margin-top: 32px; overflow: hidden; border: 1px solid var(--line);
+    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px));
   }
-  .access__map iframe { display: block; width: 100%; height: 360px; border: 0; filter: grayscale(.2) contrast(1.05); }
+  .access__map iframe { display: block; width: 100%; height: 380px; border: 0; filter: grayscale(.4) contrast(1.08); }
+  .access__more { margin-top: 20px; }
 
   /* ===== footer ===== */
-  footer {
-    background: #04040a;
-    border-top: 1px solid rgba(255,255,255,.07);
-    text-align: center;
-    padding: 56px 20px 40px;
-  }
-  footer .logo { font-family: 'Bebas Neue', sans-serif; font-size: 34px; margin-bottom: 18px; }
-  footer .sns { display: flex; justify-content: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+  footer { background: #050507; border-top: 1px solid var(--line); padding: 70px 20px 44px; overflow: hidden; }
+  footer .container { text-align: center; }
+  footer .logo { font-family: 'Anton', sans-serif; font-size: clamp(40px, 9vw, 110px); line-height: .9; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.5); margin-bottom: 28px; }
+  footer .sns { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
   footer .sns a {
-    color: var(--muted); text-decoration: none; font-size: 13px;
-    border: 1px solid rgba(255,255,255,.15); border-radius: 999px; padding: 8px 16px;
-    transition: color .2s, border-color .2s;
+    font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); text-decoration: none;
+    border: 1px solid var(--line); padding: 9px 16px; letter-spacing: .08em;
+    transition: color .2s, border-color .2s, background .2s;
   }
-  footer .sns a:hover { color: var(--text); border-color: var(--text); }
-  footer .copy { font-size: 11px; color: #55556a; letter-spacing: .1em; }
+  footer .sns a:hover { color: #000; background: var(--text); border-color: var(--text); }
+  footer .copy { font-family: 'Space Mono', monospace; font-size: 11px; color: #4f4f5c; letter-spacing: .1em; }
 
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  /* ===== reveal ===== */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   .reveal.is-visible { opacity: 1; transform: none; }
 
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 720px) {
+    .hero__tag, .crop.tl, .crop.tr { display: none; }
+    .hero__info { flex-direction: column; align-self: stretch; }
+    .hero__info > div + div { border-left: 0; border-top: 1px solid var(--line); }
+    .hero__info > div { align-items: center; }
+  }
   @media (max-width: 560px) {
     .live dl, .access dl { grid-template-columns: 1fr; }
-    .live dt, .access dt { padding-bottom: 2px; border-top: 1px solid rgba(255,255,255,.09); }
+    .live dt, .access dt { padding-bottom: 2px; border-top: 1px solid var(--line-soft); }
     .live dd, .access dd { border-top: 0; padding-top: 4px; }
-    /* スマホではグローを消す(強すぎるため) */
-    .hero h1 .hi5 { text-shadow: none; }
-    /* メンバーは1人ずつ縦に大きく(PCのカードと同じ見え方) */
-    .members__grid { grid-template-columns: 1fr; gap: 22px; }
-    .member { padding: 36px 20px 30px; }
-    .member__avatar { width: 150px; height: 150px; }
-    .member__name { font-size: 26px; }
+    .hero h1 .hi5 { filter: none; }
+    .members__grid { grid-template-columns: 1fr; gap: 18px; }
+    .member { display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: center; padding: 18px; }
+    .member__photo { margin-bottom: 0; }
+    .member__idx { top: 14px; }
   }
 </style>
 </head>
 <body>
 
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="progress" id="progress"></div>
+
 <div class="ticker" aria-hidden="true">
   <div class="ticker__inner">
-    <span>HIGH FIVE POP STARS</span><span>★</span><span>2ND ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
-    <span>HIGH FIVE POP STARS</span><span>★</span><span>2ND ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
+    <span>HIGH FIVE POP STARS</span><span class="star">✦</span><span>2ND ONE-MAN LIVE</span><span class="star">✦</span><span>2026.12.18 FRI</span><span class="star">✦</span><span>ZEPP SHINJUKU TOKYO</span><span class="star">✦</span><span>TICKET ON SALE</span><span class="star">✦</span>
+    <span>HIGH FIVE POP STARS</span><span class="star">✦</span><span>2ND ONE-MAN LIVE</span><span class="star">✦</span><span>2026.12.18 FRI</span><span class="star">✦</span><span>ZEPP SHINJUKU TOKYO</span><span class="star">✦</span><span>TICKET ON SALE</span><span class="star">✦</span>
   </div>
 </div>
 
 <header class="hero">
-  <div class="hero__badge"><span class="dot"></span>ONE-MAN LIVE 開催決定</div>
-  <h1><span class="hi5">HIGH FIVE<br>POP STARS</span></h1>
-  <p class="hero__sub">2ND ONE-MAN LIVE</p>
-  <p class="hero__live en"><span class="num">2026.12.18</span> FRI</p>
-  <p class="hero__venue">ZEPP SHINJUKU (TOKYO)</p>
-  <p class="hero__decision">— ワンマンライブ開催決定!!! —</p>
-  <div class="hero__cta">
-    <a class="btn btn--primary" href="#live">TICKET / 公演情報</a>
-    <a class="btn btn--ghost" href="#members">MEMBERS</a>
+  <div class="hero__wm" aria-hidden="true">H5PS</div>
+  <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+  <span class="hero__tag l mono">HFPS — 005</span>
+  <span class="hero__tag r mono">TOKYO / JPN</span>
+
+  <div class="hero__content">
+    <div class="hero__kicker"><span class="dot"></span>5-PIECE DANCE CREW&nbsp;&nbsp;/&nbsp;&nbsp;<b>ONE-MAN LIVE 開催決定</b></div>
+    <h1>
+      <span class="line"><span class="hi5">HIGH FIVE</span></span>
+      <span class="line"><span class="hi5">POP STARS</span></span>
+    </h1>
+    <p class="hero__sub">2ND ONE-MAN LIVE</p>
+
+    <div class="hero__info">
+      <div><span class="k">Date</span><span class="v accent">2026.12.18</span></div>
+      <div><span class="k">Day</span><span class="v">FRI</span></div>
+      <div><span class="k">Venue</span><span class="v">ZEPP SHINJUKU</span></div>
+    </div>
+
+    <p class="hero__decision">▶ ワンマンライブ開催決定 !!!</p>
+
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#live"><span>TICKET / 公演情報</span></a>
+      <a class="btn btn--ghost" href="#members"><span>MEMBERS</span></a>
+    </div>
   </div>
+
   <div class="scrolldown">SCROLL</div>
 </header>
 
 <div class="countdown">
-  <p class="countdown__label">LIVE まで あと</p>
+  <p class="countdown__label">COUNTDOWN TO LIVE</p>
   <div class="countdown__timer" id="countdown">
-    <div class="countdown__unit"><div class="val" id="cd-days">--</div><div class="unit">DAYS</div></div>
-    <div class="countdown__unit"><div class="val" id="cd-hours">--</div><div class="unit">HOURS</div></div>
-    <div class="countdown__unit"><div class="val" id="cd-mins">--</div><div class="unit">MINUTES</div></div>
-    <div class="countdown__unit"><div class="val" id="cd-secs">--</div><div class="unit">SECONDS</div></div>
+    <div class="countdown__unit"><div class="val" id="cd-days">--</div><div class="unit">Days</div></div>
+    <div class="countdown__sep">:</div>
+    <div class="countdown__unit"><div class="val" id="cd-hours">--</div><div class="unit">Hours</div></div>
+    <div class="countdown__sep">:</div>
+    <div class="countdown__unit"><div class="val" id="cd-mins">--</div><div class="unit">Minutes</div></div>
+    <div class="countdown__sep">:</div>
+    <div class="countdown__unit"><div class="val" id="cd-secs">--</div><div class="unit">Seconds</div></div>
+  </div>
+</div>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__inner">
+    <span>2ND ONE-MAN LIVE</span><span class="fill">★</span><span>2026.12.18 FRI</span><span class="fill">★</span><span>ZEPP SHINJUKU</span><span class="fill">★</span>
+    <span>2ND ONE-MAN LIVE</span><span class="fill">★</span><span>2026.12.18 FRI</span><span class="fill">★</span><span>ZEPP SHINJUKU</span><span class="fill">★</span>
   </div>
 </div>
 
 <section class="live" id="live">
   <div class="container">
-    <h2 class="sec-title reveal"><small>LIVE INFORMATION</small>公演情報</h2>
+    <div class="kicker reveal"><span class="idx">01</span><span class="label">Live Information</span><span class="rule"></span></div>
+    <h2 class="sec-title reveal">公演情報</h2>
     <div class="live__card reveal">
       <h3 class="live__title">High Five pop Stars <em>2nd ONE-MAN LIVE</em></h3>
       <p class="live__sub">"HIGH FIVE!!!!! " — 5人の手が、新宿で重なる夜。</p>
@@ -396,7 +453,7 @@
       </dl>
       <p class="note">※ 開場・開演時間、チケット料金は仮の情報です。確定次第このページでお知らせします。<br>※ 未就学児入場不可。営利目的の転売は禁止です。</p>
       <div class="live__cta">
-        <a class="btn btn--primary" href="#" onclick="alert('チケット受付ページは近日公開!'); return false;">チケットを申し込む</a>
+        <a class="btn btn--primary" href="#" onclick="alert('チケット受付ページは近日公開!'); return false;"><span>チケットを申し込む</span></a>
       </div>
     </div>
   </div>
@@ -404,7 +461,8 @@
 
 <section class="movie" id="movie">
   <div class="container">
-    <h2 class="sec-title reveal"><small>MOVIE</small>最新動画</h2>
+    <div class="kicker reveal"><span class="idx">02</span><span class="label">Movie</span><span class="rule"></span></div>
+    <h2 class="sec-title reveal">最新動画</h2>
     <p class="sec-lead reveal">5人のオリジナル振付、まずはこれを観てから新宿へ。</p>
     <div class="movie__wrap reveal">
       <iframe
@@ -415,39 +473,50 @@
     </div>
     <p class="movie__title reveal">【High Five pop Stars】セレナーデ踊ってみた【オリジナル振付】</p>
     <p class="movie__more reveal">
-      <a class="btn btn--ghost" href="https://www.youtube.com/watch?v=nKLtpd5lORA" target="_blank" rel="noopener" style="font-size:13px; padding:12px 30px;">YOUTUBEで観る</a>
+      <a class="btn btn--ghost btn--sm" href="https://www.youtube.com/watch?v=nKLtpd5lORA" target="_blank" rel="noopener"><span>YOUTUBEで観る</span></a>
     </p>
   </div>
 </section>
 
 <section class="members" id="members">
   <div class="container">
-    <h2 class="sec-title reveal"><small>MEMBERS</small>メンバー</h2>
-    <p class="sec-lead reveal">各メンバーのXもチェック!</p>
+    <div class="kicker reveal"><span class="idx">03</span><span class="label">Members</span><span class="rule"></span></div>
+    <h2 class="sec-title reveal">メンバー</h2>
+    <p class="sec-lead reveal">5色のスター。各メンバーのXもチェック。</p>
     <div class="members__grid">
       <a class="member reveal" style="--mc: var(--c1); --fx: #f5f5f7" href="https://x.com/slh_karasu_" target="_blank" rel="noopener">
-        <div class="member__avatar" role="img" aria-label="KARASU" style="background-image:url(images/karasu.jpg); background-size:320%; background-position:46% 0%"></div>
+        <span class="member__bar"></span><span class="member__idx mono">01</span>
+        <div class="member__photo" role="img" aria-label="KARASU" style="background-image:url(images/karasu.jpg); background-size:320%; background-position:46% 0%"></div>
         <div class="member__name">KARASU</div>
+        <div class="member__role">Dancer</div>
         <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@slh_karasu_</div>
       </a>
       <a class="member reveal" style="--mc: var(--c2)" href="https://x.com/Masato_Kt" target="_blank" rel="noopener">
-        <div class="member__avatar" role="img" aria-label="MASATO" style="background-image:url(images/masato.jpg); background-size:135%; background-position:58% 0%"></div>
+        <span class="member__bar"></span><span class="member__idx mono">02</span>
+        <div class="member__photo" role="img" aria-label="MASATO" style="background-image:url(images/masato.jpg); background-size:135%; background-position:58% 0%"></div>
         <div class="member__name">MASATO</div>
+        <div class="member__role">Dancer</div>
         <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@Masato_Kt</div>
       </a>
       <a class="member reveal" style="--mc: var(--c3)" href="https://x.com/KaoruGans0" target="_blank" rel="noopener">
-        <div class="member__avatar" role="img" aria-label="がんそ" style="background-image:url(images/ganso.jpg); background-size:240%; background-position:26% 28%"></div>
+        <span class="member__bar"></span><span class="member__idx mono">03</span>
+        <div class="member__photo" role="img" aria-label="がんそ" style="background-image:url(images/ganso.jpg); background-size:240%; background-position:26% 28%"></div>
         <div class="member__name">がんそ</div>
+        <div class="member__role">Dancer</div>
         <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@KaoruGans0</div>
       </a>
       <a class="member reveal" style="--mc: var(--c4)" href="https://x.com/ELECTRIC4s" target="_blank" rel="noopener">
-        <div class="member__avatar" role="img" aria-label="HIDE" style="background-image:url(images/hide.jpg); background-size:125%; background-position:42% 30%"></div>
+        <span class="member__bar"></span><span class="member__idx mono">04</span>
+        <div class="member__photo" role="img" aria-label="HIDE" style="background-image:url(images/hide.jpg); background-size:125%; background-position:42% 30%"></div>
         <div class="member__name">HIDE</div>
+        <div class="member__role">Dancer</div>
         <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@ELECTRIC4s</div>
       </a>
       <a class="member reveal" style="--mc: var(--c5)" href="https://x.com/ko_to555" target="_blank" rel="noopener">
-        <div class="member__avatar" role="img" aria-label="Kotone" style="background-image:url(images/kotone.jpg); background-size:190%; background-position:25% 8%"></div>
+        <span class="member__bar"></span><span class="member__idx mono">05</span>
+        <div class="member__photo" role="img" aria-label="Kotone" style="background-image:url(images/kotone.jpg); background-size:190%; background-position:25% 8%"></div>
         <div class="member__name">Kotone</div>
+        <div class="member__role">Dancer</div>
         <div class="member__handle"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@ko_to555</div>
       </a>
     </div>
@@ -456,7 +525,8 @@
 
 <section class="access" id="access">
   <div class="container">
-    <h2 class="sec-title reveal"><small>ACCESS</small>会場アクセス</h2>
+    <div class="kicker reveal"><span class="idx">04</span><span class="label">Access</span><span class="rule"></span></div>
+    <h2 class="sec-title reveal">会場アクセス</h2>
     <dl class="reveal">
       <dt>VENUE</dt>
       <dd>Zepp Shinjuku (TOKYO)</dd>
@@ -470,22 +540,24 @@
         src="https://www.google.com/maps?q=Zepp%20Shinjuku%20(TOKYO)&output=embed"
         loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Zepp Shinjuku (TOKYO) 地図"></iframe>
     </div>
-    <p style="text-align:center; margin-top:18px;">
-      <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Zepp+Shinjuku+(TOKYO)" target="_blank" rel="noopener" style="font-size:13px; padding:12px 30px;">GOOGLEマップで開く</a>
+    <p class="access__more reveal">
+      <a class="btn btn--ghost btn--sm" href="https://www.google.com/maps/search/?api=1&amp;query=Zepp+Shinjuku+(TOKYO)" target="_blank" rel="noopener"><span>GOOGLEマップで開く</span></a>
     </p>
   </div>
 </section>
 
 <footer>
-  <div class="logo en">HIGH FIVE POP STARS</div>
-  <div class="sns">
-    <a href="https://x.com/slh_karasu_" target="_blank" rel="noopener">KARASU</a>
-    <a href="https://x.com/Masato_Kt" target="_blank" rel="noopener">MASATO</a>
-    <a href="https://x.com/KaoruGans0" target="_blank" rel="noopener">がんそ</a>
-    <a href="https://x.com/ELECTRIC4s" target="_blank" rel="noopener">HIDE</a>
-    <a href="https://x.com/ko_to555" target="_blank" rel="noopener">Kotone</a>
+  <div class="container">
+    <div class="logo">HIGH FIVE<br>POP STARS</div>
+    <div class="sns">
+      <a href="https://x.com/slh_karasu_" target="_blank" rel="noopener">KARASU</a>
+      <a href="https://x.com/Masato_Kt" target="_blank" rel="noopener">MASATO</a>
+      <a href="https://x.com/KaoruGans0" target="_blank" rel="noopener">がんそ</a>
+      <a href="https://x.com/ELECTRIC4s" target="_blank" rel="noopener">HIDE</a>
+      <a href="https://x.com/ko_to555" target="_blank" rel="noopener">Kotone</a>
+    </div>
+    <p class="copy">&copy; 2026 HIGH FIVE POP STARS — ALL RIGHTS RESERVED</p>
   </div>
-  <p class="copy">&copy; 2026 High Five pop Stars. All Rights Reserved.</p>
 </footer>
 
 <script>
@@ -497,7 +569,7 @@
     const h = Math.floor(diff % 86400000 / 3600000);
     const m = Math.floor(diff % 3600000 / 60000);
     const s = Math.floor(diff % 60000 / 1000);
-    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
     document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
     document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
     document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
@@ -505,10 +577,21 @@
   tick();
   setInterval(tick, 1000);
 
+  // reveal on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // scroll progress bar
+  const progress = document.getElementById('progress');
+  function onScroll() {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    progress.style.width = (scrolled * 100) + '%';
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 </script>
 
 </body>
