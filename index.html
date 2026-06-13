@@ -314,6 +314,13 @@
   .member:hover { transform: translateY(-6px); border-color: var(--fx); background: #15151a; }
   .member:hover .member__photo { filter: saturate(1.1) contrast(1.05); transform: scale(1.03); }
   .member:hover .member__handle { color: var(--fx); }
+  /* スクロールで画面中央に来たメンバーをカラーで囲う(主にスマホ) */
+  .member.is-active {
+    border-color: var(--fx); background: #15151a;
+    box-shadow: 0 0 0 1px var(--fx), 0 14px 44px color-mix(in srgb, var(--fx) 32%, transparent);
+  }
+  .member.is-active .member__photo { filter: saturate(1.1) contrast(1.05); }
+  .member.is-active .member__handle { color: var(--fx); }
 
   /* ===== access ===== */
   .access { background: var(--bg2); }
@@ -583,12 +590,31 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  // 画面中央に来たメンバーをカラーでハイライト(スマホの縦1列表示のとき)
+  const memberEls = Array.from(document.querySelectorAll('.member'));
+  const mqMobile = window.matchMedia('(max-width: 560px)');
+  function updateActiveMember() {
+    if (!mqMobile.matches) { memberEls.forEach(m => m.classList.remove('is-active')); return; }
+    const mid = window.innerHeight / 2;
+    let best = null, bestDist = Infinity;
+    for (const m of memberEls) {
+      const r = m.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      const dist = Math.abs(r.top + r.height / 2 - mid);
+      if (dist < bestDist) { bestDist = dist; best = m; }
+    }
+    for (const m of memberEls) m.classList.toggle('is-active', m === best);
+  }
+  window.addEventListener('resize', updateActiveMember, { passive: true });
+  if (mqMobile.addEventListener) mqMobile.addEventListener('change', updateActiveMember);
+
   // scroll progress bar
   const progress = document.getElementById('progress');
   function onScroll() {
     const h = document.documentElement;
     const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
     progress.style.width = (scrolled * 100) + '%';
+    updateActiveMember();
   }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
