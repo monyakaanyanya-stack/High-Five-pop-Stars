@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>High Five pop Stars 1st ONE-MAN LIVE | 2026.12.18 Zepp Shinjuku (TOKYO)</title>
-<meta name="description" content="5人組ダンスグループ High Five pop Stars、初のワンマンライブが2026年12月18日(金) Zepp Shinjuku (TOKYO)にて開催決定!">
+<title>High Five pop Stars 2nd ONE-MAN LIVE | 2026.12.18 Zepp Shinjuku (TOKYO)</title>
+<meta name="description" content="5人組ダンスグループ High Five pop Stars、2ndワンマンライブが2026年12月18日(金) Zepp Shinjuku (TOKYO)にて開催決定!">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
@@ -98,13 +98,11 @@
     text-shadow: 0 0 60px rgba(255,59,92,.35);
   }
   .hero h1 .hi5 {
-    /* 全文字を白に、グローでおしゃれに見せる */
+    /* 全文字を白に、控えめなグロー */
     color: #ffffff;
     text-shadow:
-      0 0 12px rgba(255,255,255,.85),
-      0 0 28px rgba(255,255,255,.55),
-      0 0 60px rgba(255,255,255,.35),
-      0 0 110px rgba(120,160,255,.30);
+      0 0 18px rgba(255,255,255,.35),
+      0 0 50px rgba(120,160,255,.20);
   }
   .hero__sub {
     margin-top: 12px;
@@ -335,6 +333,13 @@
     .live dl, .access dl { grid-template-columns: 1fr; }
     .live dt, .access dt { padding-bottom: 2px; border-top: 1px solid rgba(255,255,255,.09); }
     .live dd, .access dd { border-top: 0; padding-top: 4px; }
+    /* スマホではグローを消す(強すぎるため) */
+    .hero h1 .hi5 { text-shadow: none; }
+    /* メンバーは1人ずつ縦に大きく(PCのカードと同じ見え方) */
+    .members__grid { grid-template-columns: 1fr; gap: 22px; }
+    .member { padding: 36px 20px 30px; }
+    .member__avatar { width: 150px; height: 150px; }
+    .member__name { font-size: 26px; }
   }
 </style>
 </head>
@@ -342,15 +347,15 @@
 
 <div class="ticker" aria-hidden="true">
   <div class="ticker__inner">
-    <span>HIGH FIVE POP STARS</span><span>★</span><span>1ST ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
-    <span>HIGH FIVE POP STARS</span><span>★</span><span>1ST ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
+    <span>HIGH FIVE POP STARS</span><span>★</span><span>2ND ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
+    <span>HIGH FIVE POP STARS</span><span>★</span><span>2ND ONE-MAN LIVE</span><span>★</span><span>2026.12.18 FRI</span><span>★</span><span>ZEPP SHINJUKU (TOKYO)</span><span>★</span><span>TICKET ON SALE</span><span>★</span>
   </div>
 </div>
 
 <header class="hero">
   <div class="hero__badge"><span class="dot"></span>ONE-MAN LIVE 開催決定</div>
   <h1><span class="hi5">HIGH FIVE<br>POP STARS</span></h1>
-  <p class="hero__sub">1ST ONE-MAN LIVE</p>
+  <p class="hero__sub">2ND ONE-MAN LIVE</p>
   <p class="hero__live en"><span class="num">2026.12.18</span> FRI</p>
   <p class="hero__venue">ZEPP SHINJUKU (TOKYO)</p>
   <p class="hero__decision">— ワンマンライブ開催決定!!! —</p>
@@ -375,7 +380,7 @@
   <div class="container">
     <h2 class="sec-title reveal"><small>LIVE INFORMATION</small>公演情報</h2>
     <div class="live__card reveal">
-      <h3 class="live__title">High Five pop Stars <em>1st ONE-MAN LIVE</em></h3>
+      <h3 class="live__title">High Five pop Stars <em>2nd ONE-MAN LIVE</em></h3>
       <p class="live__sub">"HIGH FIVE!!!!! " — 5人の手が、新宿で重なる夜。</p>
       <dl>
         <dt>DATE</dt>
