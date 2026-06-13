@@ -311,15 +311,19 @@
   .member__role { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .25em; color: var(--mc); margin-top: 8px; text-transform: uppercase; }
   .member__handle { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
   .member__handle svg { width: 13px; height: 13px; fill: currentColor; }
-  .member:hover { transform: translateY(-6px); border-color: var(--fx); background: #15151a; }
+  /* :hover / .is-active は reveal の transform:none より高い詳細度にする */
+  .members__grid .member:hover { transform: translateY(-6px); border-color: var(--fx); background: #15151a; }
   .member:hover .member__photo { filter: saturate(1.1) contrast(1.05); transform: scale(1.03); }
   .member:hover .member__handle { color: var(--fx); }
-  /* スクロールで画面中央に来たメンバーをカラーで囲う(主にスマホ) */
-  .member.is-active {
+  /* スクロールで画面中央に来たメンバーをカラーで囲う+少し拡大(キャラ選択風・主にスマホ) */
+  .members__grid .member.is-active {
     border-color: var(--fx); background: #15151a;
-    box-shadow: 0 0 0 1px var(--fx), 0 14px 44px color-mix(in srgb, var(--fx) 32%, transparent);
+    box-shadow: 0 0 0 1px var(--fx), 0 18px 50px color-mix(in srgb, var(--fx) 34%, transparent);
+    transform: scale(1.045);
+    z-index: 2;
   }
-  .member.is-active .member__photo { filter: saturate(1.1) contrast(1.05); }
+  .member.is-active .member__photo { filter: saturate(1.12) contrast(1.06); transform: scale(1.03); }
+  .member.is-active .member__idx { color: var(--fx); }
   .member.is-active .member__handle { color: var(--fx); }
 
   /* ===== access ===== */
