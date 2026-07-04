@@ -352,6 +352,71 @@
   footer .sns a:hover { color: #000; background: var(--text); border-color: var(--text); }
   footer .copy { font-family: 'Space Mono', monospace; font-size: 11px; color: #4f4f5c; letter-spacing: .1em; }
 
+  /* ===== intro splash ===== */
+  .no-scroll { overflow: hidden; }
+  .splash {
+    position: fixed; inset: 0; z-index: 10010;
+    background: #050507;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    cursor: pointer;
+    transition: transform .65s cubic-bezier(.76,0,.24,1);
+  }
+  .splash::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 8px; background: var(--accent); box-shadow: 0 0 24px var(--accent); }
+  .splash--out { transform: translateY(-102%); }
+  .splash__label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .3em; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; animation: fade .5s .2s both; }
+  .splash__logo { font-family: 'Anton', sans-serif; font-size: clamp(46px, 11vw, 120px); line-height: .9; text-transform: uppercase; animation: stamp .5s var(--ease) both; }
+  .splash__date { margin-top: 20px; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: .22em; color: var(--accent); animation: fade .5s .55s both; }
+  @keyframes stamp { 0% { transform: scale(1.8); opacity: 0; } 55% { transform: scale(.965); opacity: 1; } 100% { transform: scale(1); } }
+  /* スプラッシュ表示時はヒーローの登場アニメを開幕後にずらす */
+  .has-splash .hero__kicker { animation-delay: 1.5s; }
+  .has-splash .hero h1 .line > span { animation-delay: 1.55s; }
+  .has-splash .hero h1 .line:nth-child(2) > span { animation-delay: 1.67s; }
+  .has-splash .hero__sub { animation-delay: 1.75s; }
+  .has-splash .hero__info { animation-delay: 1.9s; }
+  .has-splash .hero__decision { animation-delay: 2s; }
+  .has-splash .hero__cta { animation-delay: 2.1s; }
+
+  /* ===== logo glitch(赤×緑のRGBズレ) ===== */
+  .hero h1 { position: relative; }
+  .glitch__layer {
+    position: absolute; inset: 0; pointer-events: none; user-select: none;
+    opacity: 0; z-index: -1; line-height: .86;
+  }
+  .glitch__layer--r { color: var(--accent); }
+  .glitch__layer--g { color: var(--c3); }
+  .glitching .glitch__layer--r { opacity: .85; animation: gl-r .32s steps(2, end) both; }
+  .glitching .glitch__layer--g { opacity: .85; animation: gl-g .32s steps(2, end) both; }
+  .glitching .line > span { animation: gl-shake .32s steps(2, end) both; }
+  @keyframes gl-r { 0% { transform: translate(-5px, 2px); clip-path: inset(8% 0 58% 0); } 50% { transform: translate(4px, -2px); clip-path: inset(62% 0 6% 0); } 100% { transform: translate(-3px, 1px); clip-path: inset(32% 0 38% 0); } }
+  @keyframes gl-g { 0% { transform: translate(5px, -2px); clip-path: inset(55% 0 14% 0); } 50% { transform: translate(-4px, 2px); clip-path: inset(4% 0 72% 0); } 100% { transform: translate(3px, -1px); clip-path: inset(44% 0 26% 0); } }
+  @keyframes gl-shake { 0% { transform: translate(3px, 0); } 50% { transform: translate(-3px, 0); } 100% { transform: none; } }
+
+  /* ===== custom cursor(PCのみ) ===== */
+  .cursor, .cursor-dot { position: fixed; top: 0; left: 0; pointer-events: none; border-radius: 50%; z-index: 10008; }
+  .cursor { width: 34px; height: 34px; border: 1.5px solid rgba(255,255,255,.85); mix-blend-mode: difference; transition: width .25s, height .25s, border-color .25s, background .25s; margin: -17px 0 0 -17px; }
+  .cursor.is-link { width: 58px; height: 58px; margin: -29px 0 0 -29px; border-color: var(--accent); mix-blend-mode: normal; background: rgba(255,45,70,.12); }
+  .cursor-dot { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: var(--accent); }
+  body.has-cursor, body.has-cursor a, body.has-cursor .btn { cursor: none; }
+  @media (pointer: coarse) { .cursor, .cursor-dot { display: none; } }
+
+  /* ===== 見出しの赤帯ワイプ ===== */
+  .sec-title { position: relative; display: inline-block; overflow: hidden; padding-right: .06em; }
+  .sec-title::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform: translateX(-102%); }
+  .sec-title.is-visible::after { animation: twipe .8s var(--ease) both; }
+  @keyframes twipe { 0% { transform: translateX(-102%); } 45% { transform: translateX(0); } 100% { transform: translateX(102%); } }
+
+  /* ===== 斜めテープ風マーキー ===== */
+  .marquee { transform: rotate(-1.4deg) scale(1.04); margin: 26px 0 10px; box-shadow: 0 14px 40px rgba(0,0,0,.4); }
+
+  /* ===== countdown演出 ===== */
+  .countdown__unit .val.tick { animation: slot .4s var(--ease); }
+  @keyframes slot { from { transform: translateY(.3em); opacity: 0; filter: blur(2px); } to { transform: none; opacity: 1; filter: none; } }
+  .countdown__sep { animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+
+  /* ===== member photo 3Dチルト(PCホバー) ===== */
+  .member:hover .member__photo { transform: perspective(650px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.06); transition: transform .12s linear, filter .35s; }
+
   /* ===== reveal ===== */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   .reveal.is-visible { opacity: 1; transform: none; }
@@ -381,6 +446,14 @@
 </head>
 <body>
 
+<div class="splash" id="splash" aria-hidden="true">
+  <div>
+    <div class="splash__label">HFPS — 2ND ONE-MAN LIVE</div>
+    <div class="splash__logo">HIGH FIVE<br>POP STARS</div>
+    <div class="splash__date">2026.12.18 FRI / ZEPP SHINJUKU</div>
+  </div>
+</div>
+
 <div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 <div class="progress" id="progress"></div>
@@ -400,9 +473,11 @@
 
   <div class="hero__content">
     <div class="hero__kicker"><span class="dot"></span><b>ONE-MAN LIVE 開催決定</b></div>
-    <h1>
+    <h1 id="logo" title="HIGH FIVE POP STARS">
       <span class="line"><span class="hi5">HIGH FIVE</span></span>
       <span class="line"><span class="hi5">POP STARS</span></span>
+      <span class="glitch__layer glitch__layer--r" aria-hidden="true">HIGH FIVE<br>POP STARS</span>
+      <span class="glitch__layer glitch__layer--g" aria-hidden="true">HIGH FIVE<br>POP STARS</span>
     </h1>
     <p class="hero__sub">2ND ONE-MAN LIVE</p>
 
@@ -572,21 +647,99 @@
 </footer>
 
 <script>
+  const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ===== intro splash(初回のみ・クリックでスキップ可)=====
+  const splash = document.getElementById('splash');
+  let introSeen = false;
+  try { introSeen = !!sessionStorage.getItem('hfps_intro'); } catch (e) {}
+  if (rm || introSeen) {
+    splash.remove();
+  } else {
+    document.documentElement.classList.add('has-splash');
+    document.body.classList.add('no-scroll');
+    let ended = false;
+    const endSplash = () => {
+      if (ended) return; ended = true;
+      splash.classList.add('splash--out');
+      document.body.classList.remove('no-scroll');
+      try { sessionStorage.setItem('hfps_intro', '1'); } catch (e) {}
+      setTimeout(() => splash.remove(), 750);
+    };
+    setTimeout(endSplash, 1500);
+    splash.addEventListener('click', endSplash);
+  }
+
   // countdown to live (2026-12-18 18:00 JST)
   const target = new Date('2026-12-18T18:00:00+09:00').getTime();
+  function setVal(id, str) {
+    const el = document.getElementById(id);
+    if (el.textContent !== str) {
+      el.textContent = str;
+      if (!rm) { el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); }
+    }
+  }
   function tick() {
     let diff = Math.max(0, target - Date.now());
     const d = Math.floor(diff / 86400000);
     const h = Math.floor(diff % 86400000 / 3600000);
     const m = Math.floor(diff % 3600000 / 60000);
     const s = Math.floor(diff % 60000 / 1000);
-    document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+    setVal('cd-days', String(d).padStart(2, '0'));
+    setVal('cd-hours', String(h).padStart(2, '0'));
+    setVal('cd-mins', String(m).padStart(2, '0'));
+    setVal('cd-secs', String(s).padStart(2, '0'));
   }
   tick();
   setInterval(tick, 1000);
+
+  // ===== ロゴの周期グリッチ(クリック/タップでも発動)=====
+  const logo = document.getElementById('logo');
+  function glitch() {
+    if (rm) return;
+    logo.classList.add('glitching');
+    setTimeout(() => logo.classList.remove('glitching'), 340);
+  }
+  if (!rm) setInterval(() => { if (Math.random() < .6) glitch(); }, 3800);
+  logo.addEventListener('click', glitch);
+
+  // ===== custom cursor(PC・fineポインタのみ)=====
+  if (matchMedia('(pointer: fine)').matches && !rm) {
+    const ring = document.createElement('div'); ring.className = 'cursor';
+    const dot = document.createElement('div'); dot.className = 'cursor-dot';
+    document.body.append(ring, dot);
+    document.body.classList.add('has-cursor');
+    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+    addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = `translate(${mx}px, ${my}px)`;
+    }, { passive: true });
+    (function loop() {
+      rx += (mx - rx) * .16; ry += (my - ry) * .16;
+      ring.style.transform = `translate(${rx}px, ${ry}px)`;
+      requestAnimationFrame(loop);
+    })();
+    document.addEventListener('mouseover', e => {
+      ring.classList.toggle('is-link', !!e.target.closest('a, .btn, button'));
+    });
+  }
+
+  // ===== member photo 3Dチルト(PCホバー)=====
+  if (matchMedia('(pointer: fine)').matches && !rm) {
+    document.querySelectorAll('.member').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5;
+        const y = (e.clientY - r.top) / r.height - .5;
+        card.style.setProperty('--ry', (x * 9) + 'deg');
+        card.style.setProperty('--rx', (-y * 9) + 'deg');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
 
   // reveal on scroll
   const io = new IntersectionObserver(entries => {
@@ -612,12 +765,22 @@
   window.addEventListener('resize', updateActiveMember, { passive: true });
   if (mqMobile.addEventListener) mqMobile.addEventListener('change', updateActiveMember);
 
-  // scroll progress bar
+  // scroll progress bar + hero parallax
   const progress = document.getElementById('progress');
+  const heroWm = document.querySelector('.hero__wm');
+  const heroContent = document.querySelector('.hero__content');
   function onScroll() {
     const h = document.documentElement;
     const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
     progress.style.width = (scrolled * 100) + '%';
+    if (!rm) {
+      const y = h.scrollTop;
+      if (y < window.innerHeight * 1.1) {
+        heroWm.style.transform = `translate(-50%, -50%) translateY(${y * .22}px)`;
+        heroContent.style.transform = `translateY(${y * .12}px)`;
+        heroContent.style.opacity = Math.max(0, 1 - y / (window.innerHeight * .85));
+      }
+    }
     updateActiveMember();
   }
   onScroll();
